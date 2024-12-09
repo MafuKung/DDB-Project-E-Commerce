@@ -1,5 +1,4 @@
 const express = require('express')
-
 const router = express.Router()
 
 const userSignUpController = require("../controller/user/userSignUp")
@@ -22,6 +21,7 @@ const updateAddToCartProduct = require('../controller/user/updateAddToCartProduc
 const deleteAddToCartProduct = require('../controller/user/deleteAddToCartProduct')
 const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
+const deleteProductController = require('../controller/product/deleteProduct')
 
 
 
@@ -29,6 +29,7 @@ router.post("/signup",userSignUpController)
 router.post("/signin",userSignInController)
 router.get("/user-details",authToken,userDetailsController)
 router.get("/userLogout",userLogout)
+ 
 
 //admin panel 
 router.get("/all-user",authToken,allUsers)
@@ -43,6 +44,8 @@ router.post("/category-product",getCategoryWiseProduct)
 router.post("/product-details",getProductDetails)
 router.get("/search",searchProduct)
 router.post("/filter-product",filterProductController)
+router.delete('/delete-product/:id', authToken, deleteProductController);
+
 
 //user add to cart
 router.post("/addtocart",authToken,addToCartController)

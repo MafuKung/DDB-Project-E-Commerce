@@ -7,6 +7,10 @@ import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
 import SummaryApi from '../common';
 import {toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const AdminEditProduct = ({
     onClose,
@@ -16,6 +20,7 @@ const AdminEditProduct = ({
 
   const [data,setData] = useState({
     ...productData,
+    product_id: productData?._id,
     productName : productData?.productName,
     brandName : productData?.brandName,
     category : productData?.category,
@@ -95,6 +100,46 @@ const AdminEditProduct = ({
   
 
   }
+  const navigate = useNavigate();
+
+  {/**delete product */}
+  const deleteProduct = async (e) => {
+    try {
+      const response = await fetch(SummaryApi.deleteProduct.url.replace(':id', data.product_id), { // แทน :id ด้วย product_id
+        method: SummaryApi.deleteProduct.method,
+        credentials: 'include', 
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      });
+  
+      // ... handle response ...
+      const responseData = await response.json(); // แปลง response เป็น JSON
+
+      if (response.ok) { 
+        // ลบสินค้าสำเร็จ
+        toast.success(responseData?.message)
+        onClose()
+        fetchdata()
+        navigate('/admin-panel/all-products/')
+        console.log('Product deleted successfully:', responseData);
+        
+        // อัพเดต UI (เช่น ลบสินค้าออกจาก list, แสดง toast message)
+      } else {
+        // เกิด error จาก server (เช่น สินค้าไม่พบ, ไม่มีสิทธิ์ลบ)
+        console.error('Error deleting product:', responseData); 
+        // แสดง error message ให้ผู้ใช้ทราบ
+      }
+    } catch (error) {
+      // ... handle error ...
+      // เกิด error ระหว่างส่ง request (เช่น network error)
+      console.error('Error deleting product:', error);
+      toast.error('เกิดข้อผิดพลาดในการลบสินค้า');
+      // แสดง error message ให้ผู้ใช้ทราบ (เช่น "Network error occurred")
+    }
+  };
+  
+
 
   return (
     <div className='fixed w-full  h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
@@ -107,7 +152,7 @@ const AdminEditProduct = ({
              </div>
          </div>
 
-       <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
+       <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' >
          <label htmlFor='productName'>Product Name :</label>
          <input 
            type='text' 
@@ -230,8 +275,13 @@ const AdminEditProduct = ({
 
 
 
-           <button className='px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700'>Update Product</button>
-       </form> 
+           <button className='px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700' onClick={handleSubmit} >Update Product</button>
+           <button className='px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700' onClick={deleteProduct} >Delete Product</button>
+       </form>
+       
+       
+          
+            
 
 
 
