@@ -1,7 +1,7 @@
 import React, { useEffect} from 'react'
 import cancelIMG from '../assest/cancel.png'
 import { Link ,useLocation} from 'react-router-dom'
-import SummaryApi from '../common';
+import SummaryApi from '../common/index.js';
 
 
 

@@ -28,6 +28,7 @@ const allOrderController = require('../controller/order/allOrder.controller')
 const saveOrderController = require('../controller/order/saveOrder')
 const updateOrderStatus = require('../controller/order/updateOrder');
 const deletePendingOrder = require('../controller/order/deleteOrder');
+const clearCartController = require('../controller/user/clearCart');
 
 router.post("/signup",userSignUpController)
 router.post("/signin",userSignInController)
@@ -65,6 +66,6 @@ router.get("/all-order",authToken,allOrderController)
 router.post('/save-order', authToken, saveOrderController);
 router.patch("/update-order-status", authToken, updateOrderStatus);
 router.delete("/delete-order", authToken, deletePendingOrder);
-
+router.delete('/clear-cart', authToken, clearCartController);
 
 module.exports = router

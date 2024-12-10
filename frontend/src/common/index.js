@@ -105,6 +105,10 @@ const SummaryApi = {
         url: `${backendDomin}/api/delete-order`,
         method: "DELETE",
     },
+    clearCart: {
+        url: `${backendDomin}/api/clear-cart`,
+        method: 'DELETE',
+    },
 }
 
 
