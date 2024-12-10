@@ -121,7 +121,6 @@ const AdminEditProduct = ({
         toast.success(responseData?.message)
         onClose()
         fetchdata()
-        navigate('/admin-panel/all-products/')
         console.log('Product deleted successfully:', responseData);
         
         // อัพเดต UI (เช่น ลบสินค้าออกจาก list, แสดง toast message)

@@ -1,9 +1,14 @@
 import React, { useEffect} from 'react'
 import cancelIMG from '../assest/cancel.png'
-import { Link } from 'react-router-dom'
+import { Link ,useLocation} from 'react-router-dom'
+import SummaryApi from '../common';
+
+
 
 const Cancel = () => {
+    const location = useLocation();
     useEffect(() => {
+        
         const deletePendingOrder = async () => {
             const queryParams = new URLSearchParams(location.search);
             const orderId = queryParams.get('orderId');
