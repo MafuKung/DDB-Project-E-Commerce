@@ -80,8 +80,31 @@ const SummaryApi = {
     deleteProduct: {
         url: `${backendDomin}/api/delete-product/:id`, // เพิ่ม endpoint สำหรับ delete product
         method: 'delete' // ใช้ method 'delete' 
-    }
-
+    },
+    payment : {
+        url : `${backendDomin}/api/checkout`,
+        method : 'post'
+    },
+    getOrder : {
+        url : `${backendDomin}/api/order-list`,
+        method : 'get'
+    },
+    allOrder : {
+        url : `${backendDomin}/api/all-order`,
+        method : 'get'
+    },
+    saveOrder: {
+        url: `${backendDomin}/api/save-order`,
+        method: 'post',
+    },
+    updateOrderStatus: {
+        url: `${backendDomin}/api/update-order-status`,
+        method: "PATCH",
+    },
+    deleteOrder: {
+        url: `${backendDomin}/api/delete-order`,
+        method: "DELETE",
+    },
 }
 
 
