@@ -40,6 +40,7 @@ const Success = () => {
             const result = await response.json();
             if (result.success) {
                 console.log("Cart cleared successfully:", result);
+                
             } else {
                 console.error("Failed to clear cart:", result.message);
             }
@@ -47,6 +48,7 @@ const Success = () => {
 
         saveOrder();
         clearCart(); // Clear the cart after the order is saved
+        
     }, [location.search]);
 
     return (
